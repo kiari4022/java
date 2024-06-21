@@ -1,0 +1,98 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>マイページ</title>
+<link rel="stylesheet" href="CSS/MyPage.css">
+<link href="https://fonts.googleapis.com/earlyaccess/sawarabimincho.css"
+	rel="stylesheet" />
+</head>
+<body>
+	<header style="display: flex;">
+		<nav>
+			<img src="IMG/0.png" alt="ロゴ" style="width: 150px;"> ようこそ
+			<c:out value="${sessionScope.session.name}" />
+			さん <br>
+
+			<ul>
+				<li><a href="TopServlet">TOP</a></li>
+				<li><a href="PostServlet">投稿</a></li>
+				<li><a href="ExplanasionServlet">用語解説</a></li>
+				<li><a href="MyPageServlet">マイページ</a></li>
+			</ul>
+		</nav>
+	</header>
+
+
+	<main>
+		<p class="mypage">マイページ</p>
+		<form action="LogoutCheckServlet" method="post">
+			<input type="submit" value="ログアウト" class="logoutbutton"><br>
+		</form>
+		<form action="InsertServlet" method="post">
+			<input type="submit" value="投稿する" class="postbutton"><br>
+		</form>
+
+		<h1>過去の自分の投稿</h1>
+
+		<c:forEach var="post" items="${post}">
+			<table>
+				<tr>
+					<td>日付：</td>
+					<td>${post.date}</td>
+				</tr>
+			</table>
+			<img src="${post.photo}" alt="写真" style="width: 450px;">
+			<table>
+
+				<tr>
+					<td>お店：</td>
+					<td>${post.store}</td>
+				</tr>
+				<tr>
+					<td>おすすめポイント：</td>
+					<td>${post.text}</td>
+				</tr>
+				<tr>
+					<td>おすすめメニュー：</td>
+					<td>${post.menu}</td>
+				</tr>
+				<tr>
+					<td>料金：</td>
+					<td>${post.price}円</td>
+				</tr>
+				<td>最寄駅からの時間：</td>
+				<td>${post.time}分</td>
+				</tr>
+				<tr>
+					<td>住所：</td>
+					<td>${post.address}</td>
+				</tr>
+				<tr>
+
+					<!-- コメントをはずしてpostを${post.text}みたく全部に追加！！！！ -->
+			</table>
+
+			<form action="UpdateServlet" method="post">
+				<input type="submit" value="更新" class="updatebutton"><br>
+				<input type="hidden" value="${post.postID}" name="postID"><br>
+			</form>
+			<form action="DeleteCheckServlet" method="post">
+				<input type="submit" value="削除" class="deletebutton"><br>
+				<input type="hidden" value="${post.postID}" name="postID"><br>
+			</form>
+
+		</c:forEach>
+
+
+	</main>
+
+	<footer>
+		<h4 style="text-align: center;">©Nyandaful</h4>
+	</footer>
+
+</body>
+</html>

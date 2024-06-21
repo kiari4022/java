@@ -1,0 +1,138 @@
+@charset "UTF-8";
+
+nav {
+	width: 100%;
+	height: 70px;
+	background-color:	#F6F5EA;
+	padding-top: 5px;
+	box-sizing: border-box;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+ul {
+	display: flex;
+	float: right;
+	margin-right: 15px;
+	text-align: left;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	display: block;
+	text-decoration: none;
+	color:#8c6239;
+	font-size: 20px;
+	margin-right: 60px;
+	font-weight: bolder;
+}
+
+a:hover {
+	color: burlywood;
+}
+
+body {
+  background-color:	#F6F5EA;
+}
+
+.mypage{
+	font-size: 20px;
+	font-weight: bold;
+	color:red;
+}
+
+
+.postbutton {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 300px;
+	margin: 0 auto;
+	padding: .9em 2em;
+	border: 2px solid #503C3C;
+	border-radius: 10px;
+	background-color: #fff;
+	color: #503C3C;
+	font-size: 40px;
+	font-weight: bold;
+	font-family: "Sawarabi Mincho";
+
+}
+
+.postbutton:hover {
+	background-color: #503C3C;
+	color: #fff;
+	font-weight: 600;
+
+}
+
+
+.logoutbutton{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100px;
+	margin-left:auto;
+	padding: .9em 2em;
+	border: 2px solid #2589d0;
+	border-radius: 10px;
+	background-color: #fff;
+	color: #2589d0;
+	font-size: 10px;
+	font-weight: bold;
+}
+
+.logoutbutton:hover {
+	background-color: #2589d0;
+	color: #fff;
+	font-weight: 600;
+
+}
+
+.deletebutton{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100px;
+	margin: 0 auto;
+	padding: .5em 1em;
+	border: 2px solid #2589d0;
+	border-radius: 10px;
+	background-color: #fff;
+	color: #2589d0;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.deletebutton:hover {
+	background-color: #2589d0;
+	color: #fff;
+	font-weight: 600;
+
+}
+
+.updatebutton{
+		display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100px;
+	margin: 0 auto;
+	padding: .5em 1em;
+	border: 2px solid #2589d0;
+	border-radius: 10px;
+	background-color: #fff;
+	color: #2589d0;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.updatebutton:hover {
+	background-color: #2589d0;
+	color: #fff;
+	font-weight: 600;
+
+}

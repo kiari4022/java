@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+body {
+  background-color: gainsboro;
+}
+
+
+.fsize{
+	font-size: 30px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.container {
+   width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-bottom:52px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+}
+
+.title{
+	text-align: left;
+	font-weight: bold;
+	margin-left: 20px;
+	
+}
+
+
+
+table{transform:translate(60px,0px);}
+
+.Check{
+border-spacing: 30px;
+
+}
+
+.result{
+	font-weight:bold; 
+	font-size:30px;
+	text-align: center;
+	padding-top:70px;
+}
+
+#name{height: 20px;
+	font-size: 108%;
+	}
+
+input[type="text"],input[type="tel"],
+input[type="password"],input[type="date"] {
+  width: 93%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius:4px;  /*角丸*/
+}
+
+
+
+input[type="submit"] {
+  width: 250px;
+  height: 40px;
+  /* padding: 15px 35px; */
+  background-color: #503c3c;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+  transition: background-color 0.1s ease; /* ホバー時のトランジション効果 */
+}
+
+input[type="submit"]:hover {
+  background-color: rgba(60, 60, 60, 0.8); /* 背景色を少し透明にする */
+  font-weight: bold;
+}

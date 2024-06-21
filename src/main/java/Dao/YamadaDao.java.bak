@@ -1,0 +1,160 @@
+package Dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import Dao.YamadaDao;
+import Entity.PostEntity;
+
+public class YamadaDao {
+	private Connection con; // Connectionをフィールドとして保持
+
+	public YamadaDao(Connection con) {
+		this.con = con;
+
+	}
+
+	public YamadaDao() {
+
+	}
+
+	public int insertPost(PostEntity Post) throws SQLException {
+		String sql = "INSERT INTO post (userID,store, menu, price,date, jyuusho, train, picture, str) VALUES ( ?,?, ?,?, now(), ?,?, ?, ?)";
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement stmt = con.prepareStatement(sql)) {
+
+			stmt.setInt(1, Post.getUserID());
+			stmt.setString(2, Post.getStore());
+			stmt.setString(3, Post.getMenu());
+			stmt.setInt(4, Post.getPrice());
+			stmt.setString(5, Post.getAddress());
+			stmt.setInt(6, Post.getTime());
+			stmt.setString(7, Post.getPhoto());
+			stmt.setString(8, Post.getText());
+			int rowsInserted = stmt.executeUpdate(); // SQL文を実行し、更新された行数を取得
+			return rowsInserted; // 更新された行数を返す
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	//全件検索
+	//	public ArrayList<PostEntity> searchPostList() throws SQLException {
+	//		String sql = "SELECT userID,store,menu,price,date,jyuusho,train,picture,str FROM Post";
+	//
+	//		try (Connection con = ConnectionManager.getConnection();
+	//				PreparedStatement stmt = con.prepareStatement(sql);
+	//				ResultSet res = stmt.executeQuery()) {
+	//			ArrayList<PostEntity> searchPostList = new ArrayList<>();
+	//			while (res.next()) {
+	//				PostEntity post = new PostEntity(0, res.getInt("userID"), res.getString("store"), res.getString("menu"),
+	//						res.getInt("price"),res.getDate("date"),
+	//						res.getString("jyuusho"), res.getInt("train"), res.getString("picture"),
+	//						res.getString("str"));
+	//				searchPostList.add(post);
+	//			}
+	//			return searchPostList;
+	//
+	//		} catch (SQLException e) {
+	//			e.printStackTrace();
+	//			throw e; // 例外
+	//		}
+	//	}
+
+	public ArrayList<PostEntity> searchPostList() throws SQLException {
+		String sql = "SELECT postID, userID, store, menu, price, date, jyuusho, train, picture, str FROM Post";
+		try (PreparedStatement stmt = con.prepareStatement(sql);
+				ResultSet res = stmt.executeQuery()) {
+			ArrayList<PostEntity> PostList = new ArrayList<>();
+			while (res.next()) {
+				PostEntity post = new PostEntity(
+						res.getInt("postID"),
+						res.getInt("userID"),
+						res.getString("store"),
+						res.getString("menu"),
+						res.getInt("price"),
+						res.getDate("date"),
+						res.getString("jyuusho"),
+						res.getInt("train"),
+						res.getString("picture"),
+						res.getString("str"));
+				PostList.add(post);
+			}
+			return PostList;
+		}
+	}
+
+	//userID検索
+	public ArrayList<PostEntity> searchPostList(int userID) throws SQLException {
+		String sql = "SELECT postID, userID, store, menu, price, date, jyuusho, train, picture, str FROM Post WHERE iserID=?";
+		try (PreparedStatement stmt = con.prepareStatement(sql)) {
+			stmt.setInt(1, userID);
+			try (ResultSet res = stmt.executeQuery()) {
+				ArrayList<PostEntity> PostList = new ArrayList<>();
+				while (res.next()) {
+					PostEntity post = new PostEntity(
+							res.getInt("postID"),
+							res.getInt("userID"),
+							res.getString("store"),
+							res.getString("menu"),
+							res.getInt("price"),
+							res.getDate("date"),
+							res.getString("jyuusho"),
+							res.getInt("train"),
+							res.getString("picture"),
+							res.getString("str"));
+					PostList.add(post);
+				}
+				return PostList;
+			}
+
+			//	public ArrayList<PostEntity> getPost() throws SQLException {
+			//	    String sql = "SELECT * FROM Post ORDER BY date ASC"; 
+			//	    // 昇順でデータを取得
+			//	    ArrayList<PostEntity> postList = new ArrayList<>();
+			//
+			//	    try (Connection con = ConnectionManager.getConnection();
+			//	         PreparedStatement stmt = con.prepareStatement(sql);
+			//	         ResultSet res = stmt.executeQuery()) {
+			//	        while (res.next()) {
+			//	            PostEntity post = new PostEntity(0, 0, res.getString("store"), res.getString("menu"),
+			//						res.getInt("price"),
+			//						res.getString("jyuusho"), res.getInt("train"), res.getString("picture"),
+			//						res.getString("str"));
+			//	            // エンティティオブジェクトにデータを設定
+			//	            post.setStore(res.getString("store"));
+			//	            post.setMenu(res.getString("menu"));
+			//	            post.setPrice(res.getInt("price"));
+			//	            post.setAddress(res.getString("jyuusho"));
+			//	            post.setTime(res.getInt("train"));
+			//	            post.setPhoto(res.getString("picture"));
+			//	            post.setText(res.getString("str"));
+			//	            postList.add(post);
+			//	        }
+			//	    }
+			//	    return postList;
+			//	}
+			////	
+			//	 public int updatePost(PostEntity post) throws SQLException {
+			//	        String sql = "UPDATE post SET store=?, menu=?, price=?, jyuusho=?, train=?, picture=?, str=? WHERE id=?";
+			//	        try (Connection con = ConnectionManager.getConnection();
+			//	             PreparedStatement stmt = con.prepareStatement(sql)) {
+			//	            stmt.setString(1, post.getStore());
+			//	            stmt.setString(2, post.getMenu());
+			//	            stmt.setInt(3, post.getPrice());
+			//	            stmt.setString(4, post.getAddress());
+			//	            stmt.setInt(5, post.getTime());
+			//	            stmt.setString(6, post.getPhoto());
+			//	            stmt.setString(7, post.getText());
+			//	            	            return stmt.executeUpdate(); // SQL文を実行し、更新された行数を取得して返す
+			//	        } catch (SQLException e) {
+			//	            e.printStackTrace();
+			//	            throw e;
+			//	        }
+			//	    }
+		}
+	}
+}
